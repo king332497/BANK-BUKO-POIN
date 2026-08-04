@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Konfirmasi Pengajuan Demo</title>
+<style>
+:root{
+  --bg:#f4f7fb;--surface:#fff;--surface-2:#f8fafc;--text:#172033;--muted:#6b7280;
+  --line:#e7ecf3;--primary:#6d28d9;--primary-2:#8b5cf6;--success:#059669;
+  --warning:#d97706;--danger:#dc2626;--shadow:0 18px 45px rgba(30,41,59,.10);--radius:22px;
+}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(139,92,246,.12),transparent 32%),var(--bg)}
+a{text-decoration:none;color:inherit}button,input{font:inherit}
+.shell{min-height:100vh;display:grid;grid-template-columns:270px 1fr}
+.sidebar{position:sticky;top:0;height:100vh;padding:24px 18px;color:#fff;background:linear-gradient(180deg,#4c1d95,#6d28d9 55%,#7c3aed);overflow:hidden}
+.sidebar:after{content:"";position:absolute;width:260px;height:260px;right:-120px;bottom:-80px;border:38px solid rgba(255,255,255,.06);border-radius:50%}
+.brand,.steps,.note{position:relative;z-index:1}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:34px;padding:0 8px}
+.mark{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);font-weight:900}
+.brand strong{display:block}.brand span{font-size:11px;color:rgba(255,255,255,.72)}
+.steps{display:grid;gap:10px}
+.step{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:14px;color:rgba(255,255,255,.76);font-size:13px}
+.step.active{color:#fff;background:rgba(255,255,255,.15)}
+.num{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:rgba(255,255,255,.13);font-size:11px;font-weight:900}
+.note{position:absolute;left:18px;right:18px;bottom:22px;padding:14px;border-radius:16px;background:rgba(17,24,39,.18);font-size:10px;line-height:1.5;color:rgba(255,255,255,.78)}
+.main{padding:28px 32px 44px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.top h1{margin:0;font-size:30px;letter-spacing:-.03em}.top p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.demo{display:flex;gap:12px;padding:15px 17px;margin-bottom:22px;border:1px solid #fde68a;border-radius:16px;background:#fffbeb;color:#854d0e;font-size:12px;line-height:1.5}
+.card{background:rgba(255,255,255,.93);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.panel{padding:24px}.grid{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.title{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.title h2{margin:0;font-size:18px}
+.primary,.secondary{border:0;cursor:pointer;border-radius:14px;padding:13px 18px;font-weight:900;transition:.2s ease}
+.primary{color:#fff;background:linear-gradient(135deg,var(--primary-2),var(--primary));box-shadow:0 12px 26px rgba(109,40,217,.22)}
+.secondary{color:var(--primary);background:#f3e8ff}.primary:hover,.secondary:hover{transform:translateY(-2px)}
+.actions{display:flex;justify-content:flex-end;gap:12px;margin-top:22px}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.sidebar{display:none}.main{padding:18px}.grid{grid-template-columns:1fr}}
+
+.summary{display:grid;gap:12px}.row{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line)}.row:last-child{border-bottom:0}
+.row span{color:var(--muted);font-size:12px}.row strong{font-size:13px;text-align:right}
+.agree{display:flex;gap:12px;align-items:flex-start;padding:15px;border-radius:15px;background:#faf8ff;border:1px solid #ddd6fe;margin-top:18px}
+.agree label{font-size:11px;line-height:1.5;color:var(--muted)}
+.notice{padding:16px;border-radius:16px;background:#ecfdf5;color:#065f46;font-size:11px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand"><div class="mark">P</div><div><strong>PinjamanKu</strong><span>Alur Demo Premium</span></div></div>
+  <div class="steps">
+    <div class="step"><div class="num">1</div>Data Pemohon</div>
+    <div class="step"><div class="num">2</div>Verifikasi</div>
+    <div class="step"><div class="num">3</div>Dokumen Demo</div>
+    <div class="step active"><div class="num">4</div>Konfirmasi</div>
+    <div class="step"><div class="num">5</div>Selesai</div>
+  </div>
+  <div class="note"><strong>Mode demonstrasi</strong><br>Ringkasan berikut bukan persetujuan atau kontrak pinjaman.</div>
+</aside>
+<main class="main">
+<header class="top"><div><h1>Konfirmasi Pengajuan</h1><p>Periksa kembali informasi simulasi sebelum melanjutkan.</p></div></header>
+<div class="demo">⚠️ <div><strong>Bukan transaksi nyata.</strong> Semua angka dan status di bawah hanya contoh antarmuka.</div></div>
+<section class="grid">
+  <article class="card panel">
+    <div class="title"><h2>Ringkasan Simulasi</h2></div>
+    <div class="summary">
+      <div class="row"><span>Nama pemohon</span><strong>Pengguna Demo</strong></div>
+      <div class="row"><span>Nomor pengajuan</span><strong>DEMO-2026-00128</strong></div>
+      <div class="row"><span>Plafon simulasi</span><strong>Rp25.000.000</strong></div>
+      <div class="row"><span>Tenor</span><strong>24 bulan</strong></div>
+      <div class="row"><span>Estimasi angsuran</span><strong>Rp1.325.000/bulan</strong></div>
+      <div class="row"><span>Dokumen demo</span><strong>3 file contoh</strong></div>
+    </div>
+    <div class="agree"><input id="agree" type="checkbox"><label for="agree">Saya memahami bahwa halaman ini hanya demonstrasi antarmuka, tidak mengirim pengajuan, tidak membuat kontrak, dan tidak memproses pencairan dana.</label></div>
+    <div class="actions"><button class="secondary" onclick="location.href='upload-dokumen.html'">Kembali</button><button class="primary" id="confirmButton" disabled>Konfirmasi Demo</button></div>
+  </article>
+  <aside class="card panel">
+    <div class="title"><h2>Informasi Penting</h2></div>
+    <div class="notice">Tidak ada data yang dikirim ke bank, lembaga keuangan, server, atau pihak ketiga. Tombol konfirmasi hanya memindahkan halaman secara lokal.</div>
+  </aside>
+</section>
+</main>
+</div>
+<script>
+const agree=document.getElementById('agree'),btn=document.getElementById('confirmButton');
+agree.addEventListener('change',()=>btn.disabled=!agree.checked);
+btn.addEventListener('click',()=>location.href='aktivasi-berhasil.html');
+</script>
+</body></html>
