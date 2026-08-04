@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Demo form verifikasi NIK dan nama ibu kandung" />
+  <meta name="description" content="form verifikasi NIK dan nama ibu kandung" />
   <title>Verifikasi Data — Demo</title>
 
   <style>
@@ -380,19 +380,19 @@
           Langkah 2 dari 3
         </div>
         <h1>Verifikasi Data Diri</h1>
-        <p>Masukkan data demo untuk melanjutkan proses aktivasi pinjaman.</p>
+        <p>Lengkapi data yang diminta untuk melanjutkan proses verifikasi layanan Credit.</p>
       </div>
     </section>
 
     <section class="form-card">
       <div class="form-title">
         <h2>Informasi Identitas</h2>
-        <p>Gunakan data simulasi. Jangan memasukkan data pribadi asli pada halaman demo.</p>
+        <p>Data yang Anda masukkan akan digunakan sebagai bagian dari proses verifikasi identitas sesuai prosedur layanan yang berlaku.</p>
       </div>
 
       <form id="identityForm" novalidate>
         <div class="field">
-          <label for="nik">NIK Demo</label>
+          <label for="nik">NIK </label>
           <div class="input-wrap">
             <input
               id="nik"
@@ -408,13 +408,13 @@
         </div>
 
         <div class="field">
-          <label for="motherName">Nama Ibu Kandung Demo</label>
+          <label for="motherName">Nama Ibu Kandung Lengkap</label>
           <div class="input-wrap">
             <input
               id="motherName"
               type="text"
               maxlength="60"
-              placeholder="Masukkan nama ibu demo"
+              placeholder="Masukkan nama ibu Lengkap"
               autocomplete="off"
             />
             <span class="field-icon">♙</span>
@@ -424,7 +424,7 @@
 
         <div class="privacy-box">
           <span class="privacy-icon">ⓘ</span>
-          <span>Halaman ini hanya untuk demonstrasi antarmuka dan tidak mengirim data ke server.</span>
+          <span>Verifikasi data Anda sebelum melanjutkan.</span>
         </div>
 
         <button id="continueButton" class="continue-button" type="submit" disabled>
@@ -442,7 +442,7 @@
     </div>
 
     <div class="footer-note">
-      Pastikan Anda tidak menggunakan NIK atau nama keluarga yang sebenarnya pada halaman simulasi ini.
+      Silakan periksa kembali data yang telah dimasukkan sebelum melanjutkan.
     </div>
 
     <div class="home-indicator"></div>
@@ -482,13 +482,13 @@
 
       if (!isNikValid()) {
         message.style.color = "#c93434";
-        message.textContent = "NIK demo harus terdiri dari tepat 16 angka.";
+        message.textContent = "NIK harus terdiri dari tepat 16 angka.";
         return;
       }
 
       if (!isNameValid()) {
         message.style.color = "#c93434";
-        message.textContent = "Nama ibu demo belum valid.";
+        message.textContent = "Nama ibu Lengkap belum valid.";
         return;
       }
 
