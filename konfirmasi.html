@@ -50,10 +50,42 @@ Saya telah membaca, memahami, dan menyetujui syarat dan ketentuan yang berlaku.
 Saya memberikan persetujuan untuk pemrosesan data sesuai dengan kebijakan privasi yang berlaku.
 
 Saya memahami bahwa pengajuan akan diproses sesuai dengan ketentuan dan hasil verifikasi yang dilakukan oleh penyedia layanan.
-.</label></div>
-<div class="actions"><button class="secondary" type="button" onclick="location.href='upload-dokumen.html'">Kembali</button><button class="primary" id="confirmButton" type="button" disabled>Konfirmasi </button></div>
-</article>
-<aside class="card"><h2>Informasi Penting</h2><div class="notice">PT. KB BUKOPIN FINANCE
+<label>
+  <input type="checkbox" id="agreement">
+  Saya menyetujui syarat dan ketentuan yang berlaku.
+</label>
+
+<div class="actions">
+  <button
+    class="secondary"
+    type="button"
+    onclick="location.href='upload-dokumen.html'"
+  >
+    Kembali
+  </button>
+
+  <button
+    class="primary"
+    id="confirmButton"
+    type="button"
+    disabled
+  >
+    Konfirmasi
+  </button>
+</div>
+
+<script>
+  const agreement = document.getElementById("agreement");
+  const confirmButton = document.getElementById("confirmButton");
+
+  agreement.addEventListener("change", function () {
+    confirmButton.disabled = !agreement.checked;
+  });
+
+  confirmButton.addEventListener("click", function () {
+    location.href = "aktivasi-berhasil.html";
+  });
+</script>PT. KB BUKOPIN FINANCE
 Didukung Oleh :
 Perbankan
 PT KB Bank Indonesia Tbk (KB Bank) 
