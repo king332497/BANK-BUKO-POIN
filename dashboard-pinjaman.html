@@ -1,256 +1,533 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Pinjaman Premium — Demo</title>
-<meta name="description" content="Dashboard demo pengelolaan pinjaman modern dan responsif">
-<style>
-:root{
-  --bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#748099;--line:#e7ecf3;
-  --blue:#2563eb;--blue2:#1d4ed8;--green:#16a34a;--green2:#15803d;
-  --amber:#d97706;--red:#dc2626;--shadow:0 12px 30px rgba(30,50,90,.08);
-  --radius:16px;--sidebar:260px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Inter,Poppins,Roboto,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-button,a{font:inherit}
-a{text-decoration:none;color:inherit}
-.app{min-height:100vh;display:grid;grid-template-columns:var(--sidebar) 1fr}
-.sidebar{position:sticky;top:0;height:100vh;background:#0f1f3d;color:#dce7ff;padding:24px 18px;display:flex;flex-direction:column}
-.brand{display:flex;align-items:center;gap:12px;padding:0 10px 24px;border-bottom:1px solid rgba(255,255,255,.1)}
-.logo{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,#3b82f6,#22c55e);font-weight:900;color:white}
-.brand h1{font-size:16px}.brand span{display:block;margin-top:3px;color:#8da4cc;font-size:11px}
-.nav{margin-top:22px;display:grid;gap:7px}
-.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:#bbcae6;font-size:13px}
-.nav a.active,.nav a:hover{background:rgba(255,255,255,.1);color:#fff}
-.nav .ico{width:20px;text-align:center}
-.sidebar-bottom{margin-top:auto;padding:16px 10px 0;border-top:1px solid rgba(255,255,255,.1)}
-.session{font-size:11px;color:#9fb0cf;line-height:1.6}
-.logout{margin-top:12px;width:100%;height:42px;border:0;border-radius:11px;background:#ef4444;color:white;font-weight:800;cursor:pointer}
-.main{min-width:0}
-.header{height:76px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20}
-.header-left{display:flex;align-items:center;gap:14px}
-.menu-btn{display:none;width:42px;height:42px;border:1px solid var(--line);background:#fff;border-radius:11px;cursor:pointer}
-.page-title h2{font-size:19px}.page-title p{margin-top:3px;color:var(--muted);font-size:11px}
-.header-actions{display:flex;align-items:center;gap:10px}
-.icon-btn{position:relative;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer}
-.badge{position:absolute;right:5px;top:4px;width:8px;height:8px;border-radius:50%;background:#ef4444}
-.profile{display:flex;align-items:center;gap:10px;padding-left:8px}
-.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1d4ed8;font-weight:900}
-.profile strong{font-size:12px}.profile span{display:block;color:var(--muted);font-size:10px;margin-top:2px}
-.content{padding:26px;max-width:1500px;margin:auto}
-.notice{padding:12px 15px;border:1px solid #dbeafe;background:#eff6ff;border-radius:13px;color:#1e40af;font-size:11px;margin-bottom:18px}
-.grid-summary{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
-.summary{padding:18px}.summary .label{color:var(--muted);font-size:11px}.summary .value{margin-top:9px;font-size:20px;font-weight:900}.summary .sub{margin-top:8px;font-size:10px;color:var(--muted)}
-.status-pill{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:6px 10px;border-radius:999px;background:#dcfce7;color:#166534;font-size:10px;font-weight:800}
-.status-pill:before{content:"";width:7px;height:7px;border-radius:50%;background:#22c55e}
-.layout2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-top:16px}
-.section{padding:20px}
-.section-head{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}
-.section-head h3{font-size:15px}.section-head span,.section-head a{font-size:10px;color:var(--muted)}
-.progress-track{height:14px;border-radius:999px;background:#e8eef7;overflow:hidden}
-.progress-bar{height:100%;width:58%;border-radius:inherit;background:linear-gradient(90deg,#2563eb,#22c55e)}
-.progress-meta{display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--muted)}
-.big-percent{font-size:30px;font-weight:900;color:#1d4ed8}
-.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.step{text-align:center;position:relative}
-.step:not(:last-child):after{content:"";position:absolute;top:15px;left:58%;width:84%;height:2px;background:#dbe4f0}
-.step.done:not(:last-child):after{background:#22c55e}
-.step-dot{position:relative;z-index:2;margin:auto;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#eef2f7;color:#94a3b8;font-size:12px;font-weight:900}
-.step.done .step-dot{background:#dcfce7;color:#15803d}
-.step.current .step-dot{background:#dbeafe;color:#1d4ed8}
-.step p{margin-top:8px;font-size:10px;color:var(--muted)}
-.table-card{margin-top:16px;overflow:hidden}
-.table-wrap{overflow:auto}
-table{width:100%;border-collapse:collapse;min-width:620px}
-th,td{padding:14px 18px;text-align:left;border-bottom:1px solid var(--line);font-size:11px}
-th{background:#f8fafc;color:#64748b;font-weight:800}
-.tag{display:inline-block;padding:5px 9px;border-radius:999px;font-size:9px;font-weight:800}
-.tag.ok{background:#dcfce7;color:#166534}.tag.wait{background:#fff7ed;color:#9a3412}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-.details{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.detail{padding:13px;border-radius:12px;background:#f8fafc}
-.detail span{display:block;color:var(--muted);font-size:9px}.detail strong{display:block;margin-top:5px;font-size:11px}
-.docs,.activity{display:grid;gap:10px}
-.doc,.act{display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:12px}
-.doc-left,.act-left{display:flex;align-items:center;gap:11px}
-.doc-icon,.act-icon{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#eff6ff;color:#1d4ed8}
-.doc strong,.act strong{font-size:10px}.doc span,.act span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
-.download{border:0;background:#eef2ff;color:#3730a3;border-radius:9px;padding:7px 10px;font-size:9px;font-weight:800;cursor:pointer}
-.actions-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
-.quick{padding:18px;border:1px solid var(--line);border-radius:15px;background:#fff;text-align:left;cursor:pointer;box-shadow:var(--shadow)}
-.quick .qicon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:#eff6ff;color:#1d4ed8;margin-bottom:13px}
-.quick strong{font-size:11px}.quick span{display:block;margin-top:5px;color:var(--muted);font-size:9px}
-.help{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px;margin-top:16px}
-.helpbox{padding:18px}.helpbox h3{font-size:13px}.helpbox p{margin-top:7px;color:var(--muted);font-size:10px;line-height:1.6}
-.helpbtn{margin-top:13px;border:0;border-radius:10px;background:#2563eb;color:#fff;padding:10px 13px;font-size:10px;font-weight:800;cursor:pointer}
-.mobile-overlay{display:none}
-@media(max-width:1150px){.grid-summary{grid-template-columns:repeat(3,1fr)}.actions-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:900px){
-  .app{grid-template-columns:1fr}.sidebar{position:fixed;left:-280px;z-index:50;width:260px;transition:.25s}.sidebar.open{left:0}
-  .menu-btn{display:block}.layout2,.info-grid{grid-template-columns:1fr}.header{padding:0 18px}.content{padding:18px}
-  .mobile-overlay.show{display:block;position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:40}
-}
-@media(max-width:650px){
-  .grid-summary,.actions-grid,.help{grid-template-columns:1fr}.profile div:last-child{display:none}
-  .header-actions{gap:5px}.content{padding:14px}.details{grid-template-columns:1fr}
-  .stepper{grid-template-columns:1fr 1fr}.step:not(:last-child):after{display:none}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Proses Pengajuan Pinjaman</title>
+  <meta name="description" content="Dashboard demo proses pengajuan pinjaman" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --green: #16a34a;
+      --bg: #f4f7fb;
+      --surface: #ffffff;
+      --text: #172033;
+      --muted: #748099;
+      --line: #e6ebf2;
+      --shadow: 0 12px 30px rgba(30, 50, 90, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, Poppins, Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 28px;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), var(--green));
+      box-shadow: 0 10px 22px rgba(37, 99, 235, .22);
+      font-weight: 900;
+      letter-spacing: .03em;
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy h1 {
+      font-size: 17px;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand-copy p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon-button {
+      position: relative;
+      width: 43px;
+      height: 43px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .icon-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .notification-dot {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 0 3px #fff;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding-left: 6px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--primary-dark);
+      background: #dbeafe;
+      font-weight: 900;
+    }
+
+    .profile-copy strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .profile-copy span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 36px));
+      margin: 28px auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border-radius: 22px;
+      color: white;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8 55%, #0f766e);
+      box-shadow: 0 20px 45px rgba(37,99,235,.18);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 240px;
+      height: 240px;
+      right: -60px;
+      top: -80px;
+      border: 40px solid rgba(255,255,255,.07);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .hero h2 {
+      margin-top: 16px;
+      font-size: clamp(24px, 4vw, 36px);
+      line-height: 1.18;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      max-width: 560px;
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .overview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-top: 18px;
+    }
+
+    .card {
+      padding: 19px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .card-label {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .card-value {
+      margin-top: 8px;
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .card-note {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #1e40af;
+      background: #dbeafe;
+      font-size: 9px;
+      font-weight: 900;
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+
+    .process-card {
+      margin-top: 18px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-head h3 {
+      font-size: 15px;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .stepper {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .step {
+      position: relative;
+      text-align: center;
+    }
+
+    .step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 58%;
+      width: 84%;
+      height: 2px;
+      background: #dbe4f0;
+    }
+
+    .step.done:not(:last-child)::after {
+      background: #22c55e;
+    }
+
+    .step-dot {
+      position: relative;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      margin: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: #94a3b8;
+      background: #eef2f7;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .step.done .step-dot {
+      color: #15803d;
+      background: #dcfce7;
+    }
+
+    .step.current .step-dot {
+      color: #1d4ed8;
+      background: #dbeafe;
+      box-shadow: 0 0 0 5px #eff6ff;
+    }
+
+    .step strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 10px;
+    }
+
+    .step span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 850px) {
+      .overview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stepper {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        text-align: left;
+        align-items: center;
+      }
+
+      .step:not(:last-child)::after {
+        left: 17px;
+        top: 37px;
+        width: 2px;
+        height: calc(100% - 10px);
+      }
+
+      .step-dot {
+        margin: 0;
+      }
+
+      .step strong,
+      .step span {
+        margin-left: 8px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .app-header {
+        padding: 0 16px;
+      }
+
+      .brand-copy p,
+      .profile-copy {
+        display: none;
+      }
+
+      .overview {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        width: min(100% - 24px, 1180px);
+        margin-top: 16px;
+      }
+
+      .hero {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="app">
-<aside class="sidebar" id="sidebar">
-  <div class="brand"><div class="logo">BP</div><div><h1>Bank Poin</h1><span>Premium Loan Services</span></div></div>
-  <nav class="nav">
-    <a class="active" href="#"><span class="ico">⌂</span>Dashboard</a>
-    <a href="#"><span class="ico">▣</span>Pinjaman Saya</a>
-    <a href="#"><span class="ico">◫</span>Pembayaran</a>
-    <a href="#"><span class="ico">▤</span>Dokumen</a>
-    <a href="#"><span class="ico">↻</span>Riwayat</a>
-    <a href="#"><span class="ico">?</span>Bantuan</a>
-    <a href="#"><span class="ico">●</span>Profil</a>
-    <a href="#"><span class="ico">⚙</span>Pengaturan</a>
-  </nav>
-  <div class="sidebar-bottom">
-    <div class="session">Sesi login aktif<br>Terakhir login: 04 Agustus 2026, 09.31 WIB</div>
-    <button class="logout" onclick="location.href='index.html'">Keluar</button>
-  </div>
-</aside>
-
-<div class="mobile-overlay" id="overlay"></div>
-
-<main class="main">
-<header class="header">
-  <div class="header-left">
-    <button class="menu-btn" id="menuBtn">☰</button>
-    <div class="page-title"><h2>Dashboard Pinjaman</h2><p>Ringkasan akun dan aktivitas pinjaman Anda</p></div>
-  </div>
-  <div class="header-actions">
-    <button class="icon-btn" title="Notifikasi">🔔<span class="badge"></span></button>
-    <button class="icon-btn" title="Profil">⚙</button>
-    <div class="profile"><div class="avatar">DR</div><div><strong>Dendi R.</strong><span>Nasabah Premium</span></div></div>
-  </div>
-</header>
-
-<section class="content">
-  <div class="notice">Halaman ini merupakan simulasi antarmuka. Seluruh data yang tampil adalah data contoh dan tidak terhubung ke sistem perbankan.</div>
-
-  <div class="grid-summary">
-    <article class="card summary"><div class="label">Total Pinjaman</div><div class="value">Rp30.000.000</div><div class="sub">Kontrak: BP-2026-0804</div></article>
-    <article class="card summary"><div class="label">Sisa Pinjaman</div><div class="value">Rp12.600.000</div><div class="sub">Setelah pembayaran terakhir</div></article>
-    <article class="card summary"><div class="label">Cicilan per Bulan</div><div class="value">Rp1.250.000</div><div class="sub">Tenor 24 bulan</div></article>
-    <article class="card summary"><div class="label">Jatuh Tempo Berikutnya</div><div class="value">05 Sep 2026</div><div class="sub">12 hari lagi</div></article>
-    <article class="card summary"><div class="label">Status Pinjaman</div><div class="status-pill">Aktif</div><div class="sub">Pembayaran lancar</div></article>
-  </div>
-
-  <div class="layout2">
-    <article class="card section">
-      <div class="section-head"><div><h3>Progress Pelunasan</h3><span>Estimasi lunas: 05 Juni 2027</span></div><div class="big-percent">58%</div></div>
-      <div class="progress-track"><div class="progress-bar"></div></div>
-      <div class="progress-meta"><span>Rp17.400.000 telah dibayar</span><span>Sisa Rp12.600.000</span></div>
-    </article>
-
-    <article class="card section">
-      <div class="section-head"><div><h3>Status Pengajuan</h3><span>Semua tahapan telah selesai</span></div></div>
-      <div class="stepper">
-        <div class="step done"><div class="step-dot">✓</div><p>Pengajuan</p></div>
-        <div class="step done"><div class="step-dot">✓</div><p>Verifikasi</p></div>
-        <div class="step done"><div class="step-dot">✓</div><p>Persetujuan</p></div>
-        <div class="step current"><div class="step-dot">✓</div><p>Pencairan</p></div>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo" aria-label="Logo perusahaan">BP</div>
+      <div class="brand-copy">
+        <h1>Bank Poin</h1>
+        <p>Layanan Pengajuan Pinjaman</p>
       </div>
-    </article>
-  </div>
-
-  <article class="card table-card">
-    <div class="section-head" style="padding:20px 20px 0"><div><h3>Informasi Angsuran</h3><span>Jadwal pembayaran terbaru</span></div><a href="#">Lihat semua</a></div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Tanggal</th><th>Nominal</th><th>Pokok</th><th>Bunga</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td>05 Agustus 2026</td><td>Rp1.250.000</td><td>Rp1.080.000</td><td>Rp170.000</td><td><span class="tag ok">Lunas</span></td></tr>
-          <tr><td>05 September 2026</td><td>Rp1.250.000</td><td>Rp1.090.000</td><td>Rp160.000</td><td><span class="tag wait">Menunggu</span></td></tr>
-          <tr><td>05 Oktober 2026</td><td>Rp1.250.000</td><td>Rp1.100.000</td><td>Rp150.000</td><td><span class="tag wait">Terjadwal</span></td></tr>
-        </tbody>
-      </table>
     </div>
-  </article>
 
-  <div class="info-grid">
-    <article class="card section">
-      <div class="section-head"><div><h3>Informasi Nasabah</h3><span>Data identitas ditampilkan sebagian</span></div></div>
-      <div class="details">
-        <div class="detail"><span>Nama</span><strong>Dendi Rahmatar</strong></div>
-        <div class="detail"><span>Nomor Pelanggan</span><strong>BP-26••••91</strong></div>
-        <div class="detail"><span>Nomor Kontrak</span><strong>CTR-2026-••804</strong></div>
-        <div class="detail"><span>Jenis Pinjaman</span><strong>Pinjaman Multiguna</strong></div>
-        <div class="detail"><span>Tenor</span><strong>24 Bulan</strong></div>
-        <div class="detail"><span>Bunga</span><strong>8,5% per tahun</strong></div>
-        <div class="detail"><span>Tanggal Mulai</span><strong>05 Juli 2025</strong></div>
-        <div class="detail"><span>Rekening</span><strong>•••• •••• 8821</strong></div>
+    <div class="header-actions">
+      <button class="icon-button" type="button" aria-label="Notifikasi">
+        🔔
+        <span class="notification-dot"></span>
+      </button>
+
+      <button class="icon-button" type="button" aria-label="Pengaturan profil">
+        ⚙
+      </button>
+
+      <div class="profile">
+        <div class="avatar">DR</div>
+        <div class="profile-copy">
+          <strong>Dendi Rahmatar</strong>
+          <span>Nasabah terverifikasi</span>
+        </div>
       </div>
-    </article>
+    </div>
+  </header>
 
-    <article class="card section">
-      <div class="section-head"><div><h3>Dokumen</h3><span>Dokumen simulasi tersedia</span></div></div>
-      <div class="docs">
-        <div class="doc"><div class="doc-left"><div class="doc-icon">▤</div><div><strong>Perjanjian Pinjaman</strong><span>PDF • 1,8 MB</span></div></div><button class="download">Unduh</button></div>
-        <div class="doc"><div class="doc-left"><div class="doc-icon">▤</div><div><strong>Jadwal Angsuran</strong><span>PDF • 820 KB</span></div></div><button class="download">Unduh</button></div>
-        <div class="doc"><div class="doc-left"><div class="doc-icon">▤</div><div><strong>Surat Persetujuan</strong><span>PDF • 640 KB</span></div></div><button class="download">Unduh</button></div>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-label">● Pengajuan sedang diproses</div>
+        <h2>Dashboard Proses Pengajuan Pinjaman</h2>
+        <p>
+          Pantau perkembangan pengajuan, status verifikasi, dan tahapan persetujuan
+          pinjaman melalui satu halaman yang rapi dan mudah dipahami.
+        </p>
       </div>
-    </article>
-  </div>
+    </section>
 
-  <div class="info-grid">
-    <article class="card section">
-      <div class="section-head"><div><h3>Riwayat Aktivitas</h3><span>Aktivitas terbaru akun</span></div></div>
-      <div class="activity">
-        <div class="act"><div class="act-left"><div class="act-icon">✓</div><div><strong>Pembayaran diterima</strong><span>05 Agustus 2026, 08.42 WIB</span></div></div></div>
-        <div class="act"><div class="act-left"><div class="act-icon">✓</div><div><strong>Kontrak diterbitkan</strong><span>04 Agustus 2026, 15.10 WIB</span></div></div></div>
-        <div class="act"><div class="act-left"><div class="act-icon">✓</div><div><strong>Verifikasi berhasil</strong><span>04 Agustus 2026, 09.15 WIB</span></div></div></div>
+    <section class="overview">
+      <article class="card">
+        <div class="card-label">Nomor Pengajuan</div>
+        <div class="card-value">PGJ-2026-0804</div>
+        <div class="card-note">Dibuat 04 Agustus 2026</div>
+      </article>
+
+      <article class="card">
+        <div class="card-label">Nominal Pengajuan</div>
+        <div class="card-value">Rp30.000.000</div>
+        <div class="card-note">Tenor pilihan 24 bulan</div>
+      </article>
+
+      <article class="card">
+        <div class="card-label">Estimasi Cicilan</div>
+        <div class="card-value">Rp1.250.000</div>
+        <div class="card-note">Per bulan</div>
+      </article>
+
+      <article class="card">
+        <div class="card-label">Status Saat Ini</div>
+        <div class="status">Dalam Verifikasi</div>
+        <div class="card-note">Estimasi selesai 1–2 hari kerja</div>
+      </article>
+    </section>
+
+    <section class="card process-card">
+      <div class="section-head">
+        <div>
+          <h3>Proses Pengajuan</h3>
+          <span>Perkembangan tahapan pengajuan pinjaman</span>
+        </div>
       </div>
-    </article>
 
-    <article class="card section">
-      <div class="section-head"><div><h3>Statistik</h3><span>Ringkasan finansial</span></div></div>
-      <div class="details">
-        <div class="detail"><span>Total Dibayar</span><strong>Rp17.400.000</strong></div>
-        <div class="detail"><span>Sisa Hutang</span><strong>Rp12.600.000</strong></div>
-        <div class="detail"><span>Angsuran Berikutnya</span><strong>Rp1.250.000</strong></div>
-        <div class="detail"><span>Denda</span><strong>Rp0</strong></div>
+      <div class="stepper">
+        <div class="step done">
+          <div class="step-dot">✓</div>
+          <div>
+            <strong>Pengajuan</strong>
+            <span>Data pengajuan telah diterima</span>
+          </div>
+        </div>
+
+        <div class="step done">
+          <div class="step-dot">✓</div>
+          <div>
+            <strong>Verifikasi Data</strong>
+            <span>Identitas berhasil diverifikasi</span>
+          </div>
+        </div>
+
+        <div class="step current">
+          <div class="step-dot">3</div>
+          <div>
+            <strong>Analisis</strong>
+            <span>Pengajuan sedang ditinjau</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-dot">4</div>
+          <div>
+            <strong>Persetujuan</strong>
+            <span>Menunggu hasil analisis</span>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-dot">5</div>
+          <div>
+            <strong>Pencairan</strong>
+            <span>Dilakukan setelah disetujui</span>
+          </div>
+        </div>
       </div>
-    </article>
-  </div>
-
-  <div class="actions-grid">
-    <button class="quick"><div class="qicon">💳</div><strong>Bayar Angsuran</strong><span>Bayar cicilan bulan berjalan</span></button>
-    <button class="quick"><div class="qicon">📄</div><strong>Lihat Kontrak</strong><span>Buka dokumen kontrak</span></button>
-    <button class="quick"><div class="qicon">⬇</div><strong>Unduh Jadwal</strong><span>Simpan jadwal angsuran</span></button>
-    <button class="quick"><div class="qicon">💬</div><strong>Hubungi CS</strong><span>Dapatkan bantuan layanan</span></button>
-    <button class="quick"><div class="qicon">＋</div><strong>Ajukan Pinjaman Baru</strong><span>Mulai pengajuan baru</span></button>
-  </div>
-
-  <div class="help">
-    <article class="card helpbox"><h3>Pusat Bantuan</h3><p>Temukan jawaban terkait pembayaran, dokumen, jadwal angsuran, dan keamanan akun.</p><button class="helpbtn">Buka Pusat Bantuan</button></article>
-    <article class="card helpbox"><h3>Live Chat</h3><p>Senin–Jumat<br>08.00–17.00 WIB</p><button class="helpbtn">Mulai Chat</button></article>
-    <article class="card helpbox"><h3>Layanan Pelanggan</h3><p>1500-123<br>help@bankpoin.demo</p><button class="helpbtn">Hubungi</button></article>
-  </div>
-</section>
-</main>
-</div>
-
-<script>
-const sidebar=document.getElementById('sidebar');
-const overlay=document.getElementById('overlay');
-document.getElementById('menuBtn').addEventListener('click',()=>{sidebar.classList.add('open');overlay.classList.add('show')});
-overlay.addEventListener('click',()=>{sidebar.classList.remove('open');overlay.classList.remove('show')});
-document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',e=>{
-  document.querySelectorAll('.nav a').forEach(x=>x.classList.remove('active'));
-  a.classList.add('active');
-  if(innerWidth<900){sidebar.classList.remove('open');overlay.classList.remove('show')}
-}));
-</script>
+    </section>
+  </main>
 </body>
 </html>
