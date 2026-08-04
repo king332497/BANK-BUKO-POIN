@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Konfirmasi Pengajuan Demo</title>
+<title>Konfirmasi Pengajuan </title>
 <style>
 :root{
   --bg:#f4f7fb;--surface:#fff;--surface-2:#f8fafc;--text:#172033;--muted:#6b7280;
@@ -46,36 +46,74 @@ a{text-decoration:none;color:inherit}button,input{font:inherit}
 <body>
 <div class="shell">
 <aside class="sidebar">
-  <div class="brand"><div class="mark">P</div><div><strong>PinjamanKu</strong><span>Alur Demo Premium</span></div></div>
+  <div class="brand"><div class="mark">P</div><div><strong>Bukopin Finance</strong><span>KB Bukopin Finance Multiguna</span></div></div>
   <div class="steps">
     <div class="step"><div class="num">1</div>Data Pemohon</div>
     <div class="step"><div class="num">2</div>Verifikasi</div>
-    <div class="step"><div class="num">3</div>Dokumen Demo</div>
+    <div class="step"><div class="num">3</div>Dokumen Lengkap</div>
     <div class="step active"><div class="num">4</div>Konfirmasi</div>
     <div class="step"><div class="num">5</div>Selesai</div>
   </div>
-  <div class="note"><strong>Mode demonstrasi</strong><br>Ringkasan berikut bukan persetujuan atau kontrak pinjaman.</div>
+  <div class="note"><strong>Pembiayaan Multiguna</strong><br>Dokumen dikirim ke server Bukopin Finance
+</div>
 </aside>
 <main class="main">
-<header class="top"><div><h1>Konfirmasi Pengajuan</h1><p>Periksa kembali informasi simulasi sebelum melanjutkan.</p></div></header>
-<div class="demo">⚠️ <div><strong>Bukan transaksi nyata.</strong> Semua angka dan status di bawah hanya contoh antarmuka.</div></div>
+<header class="top"><div><h1>Konfirmasi Pengajuan</h1><p>Periksa kembali informasi  sebelum melanjutkan.</p></div></header>
+<div class="demo">⚠️ <div><strong> transaksi nyata.</strong> Semua angka dan status di bawah Tercatat Di KB Bank (PT Bank KB Indonesia Tbk).</div></div>
 <section class="grid">
   <article class="card panel">
-    <div class="title"><h2>Ringkasan Simulasi</h2></div>
+    <div class="title"><h2>Ringkasan </h2></div>
     <div class="summary">
-      <div class="row"><span>Nama pemohon</span><strong>Pengguna Demo</strong></div>
-      <div class="row"><span>Nomor pengajuan</span><strong>DEMO-2026-00128</strong></div>
-      <div class="row"><span>Plafon simulasi</span><strong>Rp25.000.000</strong></div>
-      <div class="row"><span>Tenor</span><strong>24 bulan</strong></div>
-      <div class="row"><span>Estimasi angsuran</span><strong>Rp1.325.000/bulan</strong></div>
-      <div class="row"><span>Dokumen demo</span><strong>3 file contoh</strong></div>
+      <div class="row">
+  <span>Nama pemohon</span>
+  <strong id="namaPemohon">-</strong>
+</div>
+
+<div class="row">
+  <span>Nomor pengajuan</span>
+  <strong id="nomorPengajuan">-</strong>
+</div>
+
+<div class="row">
+  <span>Plafon pinjaman</span>
+  <strong id="plafon">Rp0</strong>
+</div>
+
+<div class="row">
+  <span>Tenor</span>
+  <strong id="tenor">0 bulan</strong>
+</div>
+
+<div class="row">
+  <span>Bunga simulasi</span>
+  <strong id="bunga">0% per bulan</strong>
+</div>
+
+<div class="row">
+  <span>Estimasi angsuran</span>
+  <strong id="estimasiAngsuran">Rp0/bulan</strong>
+</div>
+
+<div class="row">
+  <span>Dokumen demo</span>
+  <strong id="jumlahDokumen">0 file contoh</strong>
+</div>
     </div>
-    <div class="agree"><input id="agree" type="checkbox"><label for="agree">Saya memahami bahwa halaman ini hanya demonstrasi antarmuka, tidak mengirim pengajuan, tidak membuat kontrak, dan tidak memproses pencairan dana.</label></div>
+    <div class="agree"><input id="agree" type="checkbox"><label for="agree">1. Saya telah membaca dan memahami informasi serta ketentuan yang berlaku sebelum melanjutkan proses.
+
+2. Saya menyatakan bahwa data yang saya masukkan telah benar dan dapat dipertanggungjawabkan.
+
+3. Dengan melanjutkan, saya menyatakan telah memahami proses dan ketentuan penggunaan layanan ini.
+
+4. Saya telah memastikan seluruh data yang dimasukkan sudah benar sebelum melanjutkan ke tahap berikutnya.
+
+5. Saya memahami bahwa proses akan dilanjutkan sesuai dengan alur layanan yang ditampilkan pada halaman ini.
+ dan  memproses pencairan dana.</label></div>
     <div class="actions"><button class="secondary" onclick="location.href='upload-dokumen.html'">Kembali</button><button class="primary" id="confirmButton" disabled>Konfirmasi Demo</button></div>
   </article>
   <aside class="card panel">
     <div class="title"><h2>Informasi Penting</h2></div>
-    <div class="notice">Tidak ada data yang dikirim ke bank, lembaga keuangan, server, atau pihak ketiga. Tombol konfirmasi hanya memindahkan halaman secara lokal.</div>
+    <div class="notice"> data yang dikirim ke bank, lembaga keuangan, server,PT Bank KB Indonesia Tbk. Tombol konfirmasi Melanjutkan proses Pinjaman.</div>
   </aside>
 </section>
 </main>
